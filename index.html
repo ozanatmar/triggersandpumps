@@ -102,7 +102,11 @@
       setTimeout(() => body.removeChild(shape), 15000);
     }
 
-    setInterval(createShape, 500);
+    setInterval(() => {
+      for (let i = 0; i < 2; i++) {
+        createShape();
+      }
+    }, 200); // 10 shapes per second
   </script>
 </body>
 </html>
