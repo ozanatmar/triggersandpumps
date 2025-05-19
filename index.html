@@ -1,1 +1,108 @@
-Hello world!
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Coming Soon!</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Comic Sans MS', 'Arial', sans-serif;
+      background: linear-gradient(270deg, #fbc2eb, #a6c1ee, #fbc2eb);
+      background-size: 600% 600%;
+      animation: bgMove 20s ease infinite;
+      overflow: hidden;
+    }
+
+    @keyframes bgMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      height: 100%;
+      color: #fff;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+
+    p {
+      font-size: 1.5rem;
+      opacity: 0.8;
+    }
+
+    .emoji {
+      font-size: 5rem;
+      margin-top: 1rem;
+      animation: spinBounce 4s infinite ease-in-out;
+    }
+
+    @keyframes spinBounce {
+      0%, 100% { transform: rotate(0deg) translateY(0); }
+      50% { transform: rotate(360deg) translateY(-10px); }
+    }
+
+    .floating-shape {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.3;
+      animation: float 10s linear infinite;
+    }
+
+    @keyframes float {
+      from { transform: translateY(100vh); }
+      to { transform: translateY(-200px); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>✨ Something Fun is Coming! ✨</h1>
+    <p>We're cooking up something awesome. Stay tuned!</p>
+    <div class="emoji">🎉</div>
+  </div>
+
+  <script>
+    const colors = ['#FF6B6B', '#FFD93D', '#6BCB77', '#4D96FF', '#A66DD4', '#F67280'];
+    const body = document.body;
+
+    function createShape() {
+      const shape = document.createElement('div');
+      const size = Math.random() * 40 + 10;
+      shape.className = 'floating-shape';
+      shape.style.width = shape.style.height = `${size}px`;
+      shape.style.left = `${Math.random() * 100}%`;
+      shape.style.background = colors[Math.floor(Math.random() * colors.length)];
+      shape.style.animationDuration = `${8 + Math.random() * 4}s`;
+      shape.style.animationDelay = `${Math.random() * 5}s`;
+      body.appendChild(shape);
+
+      setTimeout(() => body.removeChild(shape), 15000);
+    }
+
+    setInterval(createShape, 500);
+  </script>
+</body>
+</html>
