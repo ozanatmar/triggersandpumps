@@ -9,6 +9,7 @@ body {
   background-color: #fff;
 }
 
+/* NAVIGATION */
 .navbar {
   width: 100%;
   height: 104px;
@@ -61,20 +62,11 @@ body {
   border-radius: 4px;
 }
 
-@media (max-width: 768px) {
-  .nav-menu {
-    display: none; /* ileride hamburger için */
-  }
-
-  .nav-button {
-    display: none;
-  }
-}
+/* HERO SECTION */
 .hero-section {
   background-color: white;
   width: 100%;
-  padding: 0;
-  position: relative
+  position: relative;
 }
 
 .hero-background {
@@ -120,7 +112,7 @@ body {
 .info-badge {
   position: absolute;
   top: 370px;
-  left: 100%; /* ekran dışı başlar */
+  left: 100%;
   width: 226px;
   height: 60px;
   background-color: white;
@@ -130,13 +122,21 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Inter', sans-serif;
   font-size: 16px;
   font-weight: 400;
   animation: slideIn 3s forwards;
   z-index: 20;
   padding: 0 20px;
   text-align: center;
+}
+
+@keyframes slideIn {
+  from {
+    left: 100%;
+  }
+  to {
+    left: 900px;
+  }
 }
 
 .product-selector {
@@ -165,7 +165,6 @@ body {
   align-items: center;
   justify-content: flex-start;
   text-align: center;
-  position: relative;
 }
 
 .product-item img {
@@ -198,14 +197,47 @@ body {
   display: inline-block;
 }
 
-@keyframes slideIn {
-  from {
-    left: 100%;
+/* RESPONSIVE STYLES */
+@media (max-width: 768px) {
+  .nav-menu,
+  .nav-button {
+    display: none;
   }
-  to {
-    left: 900px;
+
+  .hero-container {
+    flex-direction: column;
+    text-align: center;
+    padding: 40px 20px 0 20px;
+  }
+
+  .hero-left, .hero-right {
+    max-width: 100%;
+  }
+
+  .hero-right img {
+    width: 100%;
+    height: auto;
+    margin-top: 24px;
+  }
+
+  .info-badge {
+    display: none;
+  }
+
+  .product-selector {
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 20px;
+    margin: 40px auto 0 auto;
+  }
+
+  .product-item {
+    width: 45%;
+    margin: auto;
   }
 }
+
 
 .about-section {
   background-color: #fff;
@@ -241,8 +273,8 @@ body {
   right: 0;
   width: 225px;
   height: 400px;
-  object-fit: cover;
-  opacity: 0.3;
+  object-fit: contain;
+  opacity: 0.5;
   z-index: 0;
 }
 
@@ -289,28 +321,16 @@ body {
   border-radius: 8px;
 }
 
-.about-dots {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 225px;
-  height: 400px;
-  object-fit: contain;
-  opacity: 0.5;
-  z-index: 0;
-}
-
-
 .animate-in-left {
   opacity: 1;
   transform: translateX(0);
-  animation: slideFromLeft 1s ease-out forwards;
+  animation: slideFromLeft 0.6s ease-out forwards;
 }
 
 .animate-in-right {
   opacity: 1;
   transform: translateX(0);
-  animation: slideFromRight 1s ease-out forwards;
+  animation: slideFromRight 0.6s ease-out forwards;
 }
 
 @keyframes slideFromLeft {
@@ -335,6 +355,21 @@ body {
   }
 }
 
+@media (max-width: 768px) {
+  .about-block {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .about-text-group,
+  .about-image img {
+    width: 100%;
+  }
+
+  .about-container {
+    padding: 0 24px;
+  }
+}
 
 
 .order-section {
@@ -348,17 +383,18 @@ body {
   display: flex;
   justify-content: space-between;
   gap: 40px;
-  padding: 0 60px;
-  padding-bottom: 80px;
+  padding: 0 60px 80px 60px;
+  flex-wrap: wrap;
 }
 
 .order-left {
   max-width: 500px;
   display: flex;
   flex-direction: column;
-  justify-content: center;  /* dikey ortalama */
-  text-align: left;         /* sola hizalı içerik */
-  padding-top: 100px;       /* ekstra manuel ayar da eklenebilir */
+  justify-content: center;
+  text-align: left;
+  padding-top: 100px;
+  flex: 1 1 400px;
 }
 
 .order-left h2 {
@@ -392,11 +428,28 @@ body {
 }
 
 .order-steps {
-  width: 520px;
+  flex: 1 1 500px;
+  max-width: 520px;
   position: relative;
   padding-left: 40px;
-  border-left: 2px dotted white;
-  height: 400px; /* approx: 4 steps x 150-160px each */
+  padding-bottom: 20px;
+}
+
+.order-steps::after {
+  content: "";
+  position: absolute;
+  left: 12px; /* step-number merkezine göre hizalanır */
+  top: 0;
+  height: 330px; /* 4 adım = 4 x 110px */
+  width: 2px;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    white,
+    white 4px,
+    transparent 6px,
+    transparent 12px
+  );
+  z-index: 0;
 }
 
 .step {
@@ -407,9 +460,13 @@ body {
   position: relative;
 }
 
+.step:last-child {
+  margin-bottom: 0;
+}
+
 .step-number {
   position: absolute;
-  left: -60px; /* çizgi üzerine hizalama için genişletildi */
+  left: -60px;
   top: 0;
   width: 32px;
   height: 32px;
@@ -448,6 +505,45 @@ body {
   font-weight: 400;
   line-height: 1.5;
 }
+
+/* Shorten the vertical dotted line to align with 4th step */
+.order-steps::after {
+  content: "";
+  position: absolute;
+  left: -1px;
+  top: 0;
+  height: calc(3 * 160px + 32px); /* 3 full steps + half of 4th step */
+  border-left: 2px dotted #ffffff;
+  z-index: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .order-container {
+    flex-direction: column;
+    padding: 0 24px 60px 24px;
+  }
+
+  .order-left {
+    padding-top: 0;
+    max-width: 100%;
+  }
+
+  .order-steps {
+    padding-left: 24px;
+    margin-top: 40px;
+  }
+
+  .step-number {
+    left: -40px;
+  }
+
+  .order-steps::after {
+    left: 0;
+    height: calc(3 * 160px + 32px);
+  }
+}
+
 .products-section {
   background-color: #fff;
   padding: 80px 0 0 0;
@@ -694,68 +790,67 @@ body {
 /* Testimonials Section */
 .testimonials-section {
   background-color: #fff;
-  height: 700px;
+  padding: 100px 20px;
   display: flex;
-  align-items: center;
   justify-content: center;
-  position: relative;
   overflow: hidden;
 }
 
 .testimonial-slider {
   position: relative;
   width: 100%;
-  max-width: 960px;
-  text-align: center;
+  max-width: 1200px;
+  overflow: hidden; 
+}
+
+.testimonial-wrapper {
+  display: flex;
+  transition: transform 0.6s ease-in-out;
+  width: 100%;
 }
 
 .testimonial {
+  flex-shrink: 0;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 120px 40px;
+  text-align: center;
   position: relative;
-  padding: 0 40px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
 }
 
 .testimonial-text {
-  font-size: 40px;
+  font-size: 32px;
   font-weight: 500;
   color: #004777;
-  line-height: 1.4;
+  line-height: 1.6;
   max-width: 800px;
   margin: 0 auto;
-  position: relative;
   z-index: 2;
 }
 
 .testimonial-author {
-  margin-top: 50px;
+  margin-top: 40px;
   font-size: 16px;
   font-weight: 500;
   color: #9ED8DB;
-  z-index: 2;
 }
 
 .quotation {
   position: absolute;
   width: 110px;
-  height: 293px;
+  height: 110px;
+  opacity: 0.5;
   z-index: 1;
-  opacity: 0.3;
 }
 
 .quotation-top {
-  top: -20px;     /* text’ten 100px yukarı */
-  left: -40px;     /* mevcut konumdan 40px daha sola */
-  transform: translateY(-60%);
+  top: 10px;
+  left: 30px;
 }
 
 .quotation-bottom {
-  bottom: 20%;
-  right: 0;
-  transform: translateY(60%);
+  bottom: 10px;
+  right: 40px;
 }
 
 .testimonial-arrow {
@@ -765,59 +860,66 @@ body {
   background: none;
   border: none;
   cursor: pointer;
-  z-index: 3;
+  z-index: 10;
+  padding: 12px;
 }
 
 .testimonial-arrow.left {
-  left: 0;
+  left: 16px;
 }
 
 .testimonial-arrow.right {
-  right: 0;
+  right: 16px;
 }
 
-
-/* Sliding Animations */
-@keyframes slideInRight {
-  from {
-    transform: translateX(100%);
-    opacity: 0;
+@media (max-width: 768px) {
+  .testimonial-text {
+    font-size: 20px;
+    padding: 0 10px;
   }
-  to {
-    transform: translateX(0%);
-    opacity: 1;
+
+  .quotation {
+    width: 60px;
+    height: 60px;
+  }
+
+  .quotation-top {
+    top: -40px;
+    left: 10px;
+  }
+
+  .quotation-bottom {
+    bottom: -40px;
+    right: 10px;
+  }
+
+  .testimonial-arrow.left {
+    left: 8px;
+  }
+
+  .testimonial-arrow.right {
+    right: 8px;
   }
 }
 
-@keyframes slideOutLeft {
-  from {
-    transform: translateX(0%);
-    opacity: 1;
-  }
-  to {
-    transform: translateX(-100%);
-    opacity: 0;
-  }
-}
-
-.testimonial.slide-in {
-  animation: slideInRight 0.6s ease forwards;
-}
-
-.testimonial.slide-out {
-  animation: slideOutLeft 0.6s ease forwards;
-}
-
-
-/* Contact Section */
+/* General Contact Section Layout */
 .contact-section {
   background-color: #1D3354;
-  height: 700px;
   color: white;
   display: flex;
-  justify-content: space-between;
-  padding: 135px 124px 0 124px;
+  justify-content: center;
+  padding: 135px 124px 80px 124px;
   box-sizing: border-box;
+}
+
+.contact-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  gap: 80px;
 }
 
 /* Left Side */
@@ -838,59 +940,56 @@ body {
   margin-bottom: 48px;
 }
 
-/* Address Info */
-.address-info {
+/* Icon-Text Blocks */
+.contact-frames {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 16px; /* reduced from 24px */
 }
 
-.address-line {
+.contact-frame {
   display: flex;
   align-items: flex-start;
-  gap: 12px;
+  gap: 8px; /* reduced from 12px */
 }
 
-/* Sol ikon */
-.address-icon {
-  width: 24px;
-  height: 24px;
+.contact-icon {
+  width: 20px;
+  height: 20px;
   flex-shrink: 0;
   margin-top: 4px;
 }
 
-/* Sağ metin bloğu */
-.address-text {
+.contact-text-block {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 
-.address-text .title {
-  font-size: 20px;
-  font-weight: 400;
-}
-
-.address-text .detail {
-  font-size: 16px;
-  font-weight: 400;
-}
-
-.address-single-line {
-  font-size: 16px;
-  font-weight: 400;
+.contact-text-block .main,
+.contact-text-block .sub {
+  margin: 0;
+  padding: 0;
   line-height: 1.5;
-  margin-top: 2px;
 }
 
-.contact-link {
+.contact-text-block .main {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.contact-text-block .sub {
   font-size: 16px;
   font-weight: 400;
-  text-decoration: none;
   color: white;
 }
 
-.contact-link:hover {
+.contact-text-block .link {
+  color: white;
+  text-decoration: none;
+}
+
+.contact-text-block .link:hover {
   text-decoration: underline;
 }
 
@@ -906,7 +1005,7 @@ body {
 
 .form-group label {
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 400;
   color: white;
   display: block;
   margin-bottom: 6px;
@@ -919,14 +1018,17 @@ body {
   border-radius: 5px;
   padding: 16px 24px;
   font-size: 16px;
+  font-family: inherit; /* Ensures all inputs use same font */
   color: white;
   background-color: #ffffff1a;
 }
 
 .form-group input::placeholder,
 .form-group textarea::placeholder {
-  color: #E1E1E1;
+  color: white;
+  opacity: 0.5; /* Placeholder half-transparent */
   font-weight: 400;
+  font-family: inherit;
 }
 
 textarea {
@@ -936,7 +1038,8 @@ textarea {
 
 /* Submit Button */
 .submit-button {
-  width: 504px;
+  width: 100%;
+  max-width: 504px;
   height: 55px;
   border: 1px solid white;
   border-radius: 4px;
@@ -960,13 +1063,24 @@ textarea {
   background-color: #004777;
 }
 
-.contact-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  max-width: 1440px;
-  width: 100%;
-  margin: 0 auto;
+/* Responsive */
+@media (max-width: 768px) {
+  .contact-section {
+    flex-direction: column;
+    padding: 60px 24px;
+  }
+
+  .contact-container {
+    flex-direction: column;
+    gap: 48px;
+    align-items: center;
+  }
+
+  .contact-left,
+  .contact-right {
+    width: 100%;
+    max-width: 100%;
+  }
 }
 
 .footer-section {

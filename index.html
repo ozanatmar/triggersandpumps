@@ -13,7 +13,9 @@
   <header class="navbar">
     <div class="nav-container">
       <div class="logo">
-        <img src="assets/logo.svg" alt="Triggers and Pumps Logo" />
+        <a href="#home">
+          <img src="assets/logo.svg" alt="Triggers and Pumps Logo" />
+        </a>  
       </div>
       <nav class="nav-menu">
         <a href="#home">Home</a>
@@ -126,27 +128,6 @@
     </div>
   </div>
 </section>
-<script>
-  const blocks = document.querySelectorAll('.about-block');
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        if (entry.target.classList.contains('animated-left')) {
-          entry.target.classList.add('animate-in-left');
-        }
-        if (entry.target.classList.contains('animated-right')) {
-          entry.target.classList.add('animate-in-right');
-        }
-        observer.unobserve(entry.target); // run once
-      }
-    });
-  }, {
-    threshold: 0.3
-  });
-
-  blocks.forEach(block => observer.observe(block));
-</script>
 
 <!-- How to Order Section -->
 <section class="order-section" id="howtoorder">
@@ -309,7 +290,7 @@
 </div>
 </section>
 
-<section class="shipping-section">
+<section class="shipping-section" id="shipping">
   <div class="shipping-container">
     <h2>Choose Your Shipping Option</h2>
     <p class="shipping-subtitle">Compare loading types based on cost, delivery time, and order quantity.</p>
@@ -317,97 +298,23 @@
   </div>
 </section>
 
-<section class="testimonials-section">
+<section class="testimonials-section" id="testimonials">
   <div class="testimonial-slider">
-    <div class="testimonial">
-      <img src="assets/topquotation.svg" class="quotation quotation-top" alt="Quote Top" />
-      <p class="testimonial-text">
-        We have worked with many suppliers, but none were this hands-on. Their quality inspections at every stage—especially during loading—gave us full peace of mind.
-      </p>
-      <p class="testimonial-author">
-        Laura Meier, Procurement Manager at CleanPro
-      </p>
-      <img src="assets/bottomquotation.svg" class="quotation quotation-bottom" alt="Quote Bottom" />
+    <div class="testimonial-wrapper">
+      <!-- Testimonial items will be dynamically injected here -->
     </div>
-    <!-- other testimonials will follow the same structure -->
-    <button class="testimonial-arrow left" onclick="prevTestimonial()">
+    <button class="testimonial-arrow left">
       <img src="assets/left.svg" alt="Left" />
     </button>
-    <button class="testimonial-arrow right" onclick="nextTestimonial()">
+    <button class="testimonial-arrow right">
       <img src="assets/right.svg" alt="Right" />
     </button>
   </div>
 </section>
 
 
-<script>
-const testimonials = [
-  {
-    text: "We’ve worked with many suppliers, but none were this hands-on. Their quality inspections at every stage—especially during loading—gave us full peace of mind.",
-    author: "Laura Meier, Procurement Manager at CleanPro"
-  },
-  {
-    text: "We’ve worked with many suppliers, but none were this hands-on. Their quality inspections at every stage—especially during loading—gave us full peace of mind.",
-    author: "Jean-Luc Fournier, Brand Director at Beauté Naturelle"
-  },
-  {
-    text: "As a mid-size company, we really appreciate their flexible shipping options. Being able to buy smaller volumes from their EU stock is a big advantage.",
-    author: "Marta Kowalska, Supply Chain Coordinator at EkoChem"
-  },
-  {
-    text: "We needed a specific bottle type on short notice. They sourced it through their China network within days. Super responsive and resourceful.",
-    author: "James Ellis, Operations Director at GlowSense"
-  },
-  {
-    text: "Excellent balance of price and quality. They helped us reduce unit cost without compromising on performance—plus they deliver globally.",
-    author: "Isabella Rossi, Purchasing Lead at SunVera Cosmetics"
-  }
-];
 
-const wrapper = document.querySelector('.testimonial-wrapper');
-let currentIndex = 0;
-
-// Her testi için DOM'a yeni eleman ekle
-testimonials.forEach((t, i) => {
-  if (i === 0) return; // ilki zaten HTML’de var
-  const testimonial = document.createElement('div');
-  testimonial.classList.add('testimonial');
-  testimonial.innerHTML = `
-    <img src="assets/topquotation.svg" class="quotation quotation-top" alt="Quote Top" />
-    <p class="testimonial-text">${t.text}</p>
-    <p class="testimonial-author">${t.author}</p>
-    <img src="assets/bottomquotation.svg" class="quotation quotation-bottom" alt="Quote Bottom" />
-  `;
-  wrapper.appendChild(testimonial);
-});
-
-// Başlangıç testi içeriğini doldur
-document.querySelector(".testimonial-text").textContent = testimonials[0].text;
-document.querySelector(".testimonial-author").textContent = testimonials[0].author;
-
-function updateSlider() {
-  wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
-}
-
-function nextTestimonial() {
-  currentIndex = (currentIndex + 1) % testimonials.length;
-  updateSlider();
-}
-
-function prevTestimonial() {
-  currentIndex = (currentIndex - 1 + testimonials.length) % testimonials.length;
-  updateSlider();
-}
-
-document.querySelector('.testimonial-arrow.right').addEventListener('click', nextTestimonial);
-document.querySelector('.testimonial-arrow.left').addEventListener('click', prevTestimonial);
-
-// Otomatik geçiş
-setInterval(nextTestimonial, 6000);
-</script>
-
-
-
+<!-- Contact Section -->
 <section class="contact-section" id="contact">
   <div class="contact-container">
     <!-- Left Content -->
@@ -418,8 +325,11 @@ setInterval(nextTestimonial, 6000);
         We think that you’ve already know our work method ;)
       </p>
 
-      <div class="contact-details">
-        <div class="contact-line">
+      <!-- Frames: Address Info -->
+      <div class="contact-frames">
+        
+        <!-- Frame B -->
+        <div class="contact-frame">
           <img src="assets/building.svg" alt="Building Icon" class="contact-icon" />
           <div class="contact-text-block">
             <p class="main">Vimex-M Trade House Bulgaria OOD</p>
@@ -428,15 +338,22 @@ setInterval(nextTestimonial, 6000);
           </div>
         </div>
 
-        <div class="contact-line">
+        <!-- Frame C -->
+        <div class="contact-frame">
           <img src="assets/location.svg" alt="Location Icon" class="contact-icon" />
-          <p class="sub">Varna, Bulgaria</p>
+          <div class="contact-text-block">
+            <p class="sub">Varna, Bulgaria</p>
+          </div>
         </div>
 
-        <div class="contact-line">
+        <!-- Frame D -->
+        <div class="contact-frame">
           <img src="assets/facebook.svg" alt="Facebook Icon" class="contact-icon" />
-          <a href="https://www.facebook.com/triggersandpumps" class="sub link">follow us</a>
+          <div class="contact-text-block">
+            <a href="https://www.facebook.com/triggersandpumps" class="sub link">follow us</a>
+          </div>
         </div>
+
       </div>
     </div>
 
@@ -462,41 +379,6 @@ setInterval(nextTestimonial, 6000);
           Submit <img src="assets/send.svg" alt="Send Icon" />
         </button>
       </form>
-      <script>
-        document.querySelector("form").addEventListener("submit", function (e) {
-          e.preventDefault(); // Prevent default form submission
-      
-          const name = document.getElementById("name").value.trim();
-          const email = document.getElementById("email").value.trim();
-          const message = document.getElementById("message").value.trim();
-      
-          const data = {
-            name,
-            email,
-            message,
-          };
-      
-          fetch("https://hook.eu2.make.com/xjlx3122zqtay2hhl7zkdbpdgd2ut848", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
-          })
-            .then((response) => {
-              if (response.ok) {
-                alert("Thank you! Your message has been sent.");
-                document.querySelector("form").reset();
-              } else {
-                alert("Oops! Something went wrong.");
-              }
-            })
-            .catch((error) => {
-              console.error("Error sending data:", error);
-              alert("An error occurred. Please try again later.");
-            });
-        });
-      </script>
     </div>
   </div>
 </section>
@@ -525,6 +407,9 @@ setInterval(nextTestimonial, 6000);
   </div>
 </footer>
 
+<script src="js/testimonials.js" defer></script>
+<script src="js/about.js" defer></script>
+<script src="js/contact.js" defer></script>
 
 </body>
 </html>
